@@ -36,25 +36,16 @@
             let h = canvas.height;
             let x=0, y=0;
             const n = w/(t*2);
-            let o = 0; // offset
             
-                for (let i=0; i<n; i++) {
-                    ctx.fillStyle = (i)%2==0 ? 'blue' : 'white';
-                    ctx.fillRect(x, y, w, h);
-                    x += t;
-                    y += t;
-                    w -= t*2;
-                    h -= t*2;
-                }
+            for (let i=0; i<n; i++) {
+                ctx.fillStyle = (i)%2==0 ? 'blue' : 'white';
+                ctx.fillRect(x, y, w, h);
+                x += t;
+                y += t;
+                w -= t*2;
+                h -= t*2;
+            }
 
-            // ctx.fillStyle = "blue";
-            // ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            // ctx.fillStyle = 'rgb(200, 0, 0)';
-            // ctx.fillRect(10, 10, 50, 50);
-
-            // ctx.fillStyle = 'rgba(0, 0, 200, 0.5)';
-            // ctx.fillRect(30, 30, 50, 50);
         </script>
     </body>
 </html>
