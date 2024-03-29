@@ -38,7 +38,6 @@
             const n = w/(t*2);
             let o = 0; // offset
             
-            while (true) {
                 for (let i=0; i<n; i++) {
                     ctx.fillStyle = (i)%2==0 ? 'blue' : 'white';
                     ctx.fillRect(x, y, w, h);
@@ -47,9 +46,7 @@
                     w -= t*2;
                     h -= t*2;
                 }
-                new Promise(resolve => setTimeout(resolve, 200));
-                t++;
-            }
+
             // ctx.fillStyle = "blue";
             // ctx.fillRect(0, 0, canvas.width, canvas.height);
 
