@@ -28,24 +28,34 @@
         <!-- <script src="" async defer></script> -->
 
         <script>
-            const canvas = document.getElementById('myCanvas');
-            const ctx = canvas.getContext('2d');
-
-            let t = 10;
-            let w = canvas.width;
-            let h = canvas.height;
-            let x=0, y=0;
-            const n = w/(t*2);
-            
-            for (let i=0; i<n; i++) {
-                ctx.fillStyle = (i)%2==0 ? 'blue' : 'white';
-                ctx.fillRect(x, y, w, h);
-                x += t;
-                y += t;
-                w -= t*2;
-                h -= t*2;
+            let g=0;
+            function draw() {
+                const canvas = document.getElementById('myCanvas');
+                const ctx = canvas.getContext('2d');
+                ctx.clearRect(0, 0, canvas.width, canvas.height); // clear canvas
+    
+                let t = 10;
+                let w = canvas.width;
+                let h = canvas.height;
+                let x=0, y=0;
+                const n = w/(t*2);
+                let c1 = 'blue', c2 = 'white';
+                if (g%2==0) {
+                    c1 = 'white';
+                    c2 = 'blue';
+                }
+                g++;
+                for (let i=0; i<n; i++) {
+                    ctx.fillStyle = (i)%2==0 ? c1 : c2;
+                    ctx.fillRect(x, y, w, h);
+                    x += t;
+                    y += t;
+                    w -= t*2;
+                    h -= t*2;
+                }
+                window.requestAnimationFrame(draw);
             }
-
+            window.requestAnimationFrame(draw);
         </script>
     </body>
 </html>
