@@ -49,16 +49,33 @@ const cardArray = [
     }
 ]
 
-cardArray.sort(() => 0.5 - Math.random())
+// cardArray.sort(() => 0.5 - Math.random())
 
 const gridDisplay = document.querySelector("#grid")
 const resultDisplay = document.getElementById("result")
 const missesDisplay = document.getElementById("misses")
+const lowScoreDisplay = document.getElementById("low-score")
 let cardsChosen = [];
 let cardsChosenIds = [];
-const cardsWon = [];
+let cardsWon = [];
+
+function newGame() {
+    cardArray.sort(() => 0.5 - Math.random());
+    cardsChosen = [];
+    cardsChosenIds = [];
+    cardsWon = [];
+    resultDisplay.textContent = ""
+    missesDisplay.textContent = 0
+    const cards = document.querySelectorAll('img');
+    for (const card of cards) {
+        card.src = 'images/blank.png';
+        card.addEventListener('click', flipCard);
+    }
+}
 
 function createBoard() {
+    const btn = document.getElementById('new-game')
+    btn.addEventListener('click', newGame)
     for (let i = 0; i < cardArray.length; i++) {
         card = document.createElement('img')
         card.setAttribute('src', 'images/blank.png')
@@ -66,7 +83,7 @@ function createBoard() {
         card.setAttribute('style', "border: 1px solid black")
         card.addEventListener('click', flipCard)
         gridDisplay.appendChild(card);
-    }   
+    }
 }
 
 createBoard();
@@ -91,7 +108,7 @@ function checkMatch() {
     } else {
         cards[cardsChosenIds[0]].setAttribute('src', 'images/blank.png');
         cards[cardsChosenIds[1]].setAttribute('src', 'images/blank.png');
-                let misses = parseInt(missesDisplay.textContent)
+        let misses = parseInt(missesDisplay.textContent)
         misses++;
         missesDisplay.textContent = misses;
     }
@@ -101,7 +118,14 @@ function checkMatch() {
     
     // console.log(`cardsWon.length = ${cardsWon.length} cardArray.length/2 = ${cardArray.length/2}`)
     if (cardsWon.length == cardArray.length/2) {
-        resultDisplay.textContent = 'You found them all!'
+        let displaymsg = "You found them all!"; 
+        let lowmisses = parseInt(lowScoreDisplay.textContent)
+        let misses = parseInt(missesDisplay.textContent)
+        if (misses < lowmisses) {
+            displaymsg += " and got a new low score!"
+            lowScoreDisplay.textContent = misses
+        }
+        resultDisplay.textContent = displaymsg;
     }
 }
 
